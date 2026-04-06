@@ -21,7 +21,7 @@ DATABASE_API_KEY = os.environ.get("DATABASE_API_KEY")
 #==============================================
 
 query_params = {
-    "query": "SELECT pl_name,hostname,ra,dec FROM ps WHERE disc_facility LIKE '%Kepler%'",
+    "query": "SELECT pl_name,hostname,ra,dec,pl_rade,pl_bmasse,st_teff,sy_dist FROM ps WHERE disc_facility LIKE '%Kepler%'",
     "format": "json"
 }
 headers = {
@@ -38,7 +38,7 @@ print(response.status_code)
 
 data = response.json()
 print(type(data))
-#df = pd.DataFrame(data)
-#print(df.head())
+df = pd.DataFrame(data)
+print(df.head())
 
 #==============================================
