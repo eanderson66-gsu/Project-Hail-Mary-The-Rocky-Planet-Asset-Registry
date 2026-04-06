@@ -17,6 +17,8 @@ load_dotenv()
 DATABASE_API_KEY = os.environ.get("DATABASE_API_KEY")
 
 #==============================================
+
+#==============================================
 #STEP 2: Make API request to NASA Exoplanet Archive
 #==============================================
 
@@ -33,12 +35,52 @@ response = requests.get(
 print(response.status_code)
 
 #==============================================
+
+#==============================================
 #STEP 3: Process the response and convert to DataFrame
 #==============================================
 
 data = response.json()
 print(type(data))
+
+#==============================================
+
+#==============================================
+#STEP 4: Convert JSON data to pandas DataFrame and display the first few rows
+#==============================================
+
 df = pd.DataFrame(data)
 print(df.head())
+
+#==============================================
+
+#==============================================
+#STEP 5: Perform integrity checks on the data and Drop any rows with missing values
+#==============================================
+
+print(df.isnull().sum())
+
+cols_to_check = ['pl_bmasse', 'pl_rade', 'sy_dist']
+df_cleaned = df.dropna(subset=cols_to_check)
+
+
+print(f"Mission-Ready Assets: {len(df_cleaned)}")
+
+#==============================================
+
+#==============================================
+#STEP 6: Calculate the Relative Surface Gravity for each exoplanet and add it as a new column in the DataFrame
+#==============================================
+
+df_cleaned['gravity'] = df_cleaned['pl_bmasse'] / (df_cleaned['pl_rade']**2)
+
+#==============================================
+
+#==============================================
+#STEP 7: reate a new Boolean column (True/False) called habitable
+#==============================================
+
+df_cleaned['habitable'] = (df_cleaned['gravity'] >= 0.8) & (df_cleaned['gravity'] <= 1.2) & (df_cleaned['sy_dist'] <= 100).astype(bool)
+print(df_cleaned['habitable'].sum())
 
 #==============================================
