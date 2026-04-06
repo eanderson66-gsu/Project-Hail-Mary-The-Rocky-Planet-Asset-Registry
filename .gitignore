@@ -1,0 +1,5 @@
+# Secrets
+key.env
+.venv/
+__pycache__/
+*.log
