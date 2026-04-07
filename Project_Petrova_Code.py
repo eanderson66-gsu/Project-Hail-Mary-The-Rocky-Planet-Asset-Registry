@@ -82,5 +82,6 @@ df_cleaned['gravity'] = df_cleaned['pl_bmasse'] / (df_cleaned['pl_rade']**2)
 
 df_cleaned['habitable'] = (df_cleaned['gravity'] >= 0.8) & (df_cleaned['gravity'] <= 1.2) & (df_cleaned['sy_dist'] <= 100).astype(bool)
 print(df_cleaned['habitable'].sum())
-
+df_test = df_cleaned[df_cleaned['habitable'] == True]
+print(df_test['habitable'].sum())
 #==============================================
