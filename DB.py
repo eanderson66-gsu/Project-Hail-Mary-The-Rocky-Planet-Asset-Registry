@@ -9,7 +9,7 @@ import Project_Petrova_Code as ppc
 #==============================================
 
 #==============================================
-#STEP 1: Create a connection to the SQLite database
+#STEP 1: Create a connection to the SQLite database and insert the DataFrame into a table
 #==============================================
 
 db_path = r'C:\Users\era64\Downloads\GSU Portfolio Projects\Project Petrova Automated Orbital Asset & Thermal Flux Monitoring System\Project_Petrova_DB'
@@ -23,3 +23,5 @@ except Exception as e:
 finally:
     if 'conn' in locals():
         conn.close()
+
+#==============================================

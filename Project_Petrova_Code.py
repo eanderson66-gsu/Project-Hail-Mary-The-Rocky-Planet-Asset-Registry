@@ -84,4 +84,11 @@ df_cleaned['habitable'] = (df_cleaned['gravity'] >= 0.8) & (df_cleaned['gravity'
 print(df_cleaned['habitable'].sum())
 df_test = df_cleaned[df_cleaned['habitable'] == True]
 print(df_test['habitable'].sum())
+
 #==============================================
+
+#==============================================
+#STEP 8: Save test DataFrame to a CSV file
+#==============================================
+
+df_test.to_csv('mission_ready_planets.csv', index=False)
